@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: ./app
+    ports:
+      - "3003:3000"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

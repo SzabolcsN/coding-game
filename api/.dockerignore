@@ -1,0 +1,15 @@
+.git
+.gitignore
+node_modules
+Dockerfile
+.dockerignore
+*.md
+coverage
+test
+tests
+example
+examples
+docker-compose*
+.npm
+.editorconfig
+.gitattributes
