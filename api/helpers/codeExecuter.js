@@ -13,34 +13,21 @@ const executeCode = async (code, language, input) => {
         fs.writeFileSync(tempFile, code);
         command = `node ${tempFile}`;
         break;
-      case 'python':
-        tempFile = path.join(__dirname, `temp-${timestamp}.py`);
-        fs.writeFileSync(tempFile, code);
-        command = `python3 ${tempFile}`;
-        break;
+        case 'python':
+          command = `C:\\Python39\\python.exe ${tempFile}`;
+          break;
       case 'java':
-        tempFile = path.join(__dirname, `Temp${timestamp}.java`);
-        fs.writeFileSync(tempFile, code);
-        command = `javac ${tempFile} && java -cp ${__dirname} Temp${timestamp}`;
-        break;
+          command = `C:\\Program Files\\Java\\jdk-17\\bin\\javac.exe ${tempFile} && java -cp ${__dirname} Temp${timestamp}`;
+          break;
       case 'c':
-        tempFile = path.join(__dirname, `temp-${timestamp}.c`);
-        compiledFile = path.join(__dirname, `temp-${timestamp}.exe`);
-        fs.writeFileSync(tempFile, code);
-        command = `gcc ${tempFile} -o ${compiledFile} && ${compiledFile}`;
-        break;
+          command = `"C:\\MinGW\\bin\\gcc.exe" ${tempFile} -o ${compiledFile} && ${compiledFile}`;
+          break;
       case 'cpp':
-        tempFile = path.join(__dirname, `temp-${timestamp}.cpp`);
-        compiledFile = path.join(__dirname, `temp-${timestamp}.exe`);
-        fs.writeFileSync(tempFile, code);
-        command = `g++ ${tempFile} -o ${compiledFile} && ${compiledFile}`;
-        break;
+          command = `"C:\\MinGW\\bin\\g++.exe" ${tempFile} -o ${compiledFile} && ${compiledFile}`;
+          break;
       case 'csharp':
-        tempFile = path.join(__dirname, `Temp${timestamp}.cs`);
-        compiledFile = path.join(__dirname, `Temp${timestamp}.exe`);
-        fs.writeFileSync(tempFile, `using System; class Temp${timestamp} { static void Main() { ${code} } }`);
-        command = `mcs -out:${compiledFile} ${tempFile} && ${compiledFile}`;
-        break;
+          command = `"C:\\Program Files\\Mono\\bin\\mcs.exe" -out:${compiledFile} ${tempFile} && mono ${compiledFile}`;
+          break;        
       default:
         return reject(new Error('Unsupported language'));
     }
